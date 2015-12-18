@@ -616,6 +616,10 @@ def python_kent_hdr(image, drawable, width1, width2, blur, levelLight, levelDark
         layer_dark = image.layers[1]
         layer_bright = image.layers[0]
         
+        limit = 4
+        current = 0
+        gimp.progress_init("HDR with Gradient Domain High Dynamic Range Compression...")
+        
         tempfile.NamedTemporaryFile(delete=False)
         temporary_directory = tempfile.tempdir
         
@@ -627,17 +631,26 @@ def python_kent_hdr(image, drawable, width1, width2, blur, levelLight, levelDark
         pdb.gimp_file_save(image, layer_dark, dark_path, '?')
         pdb.gimp_file_save(image, layer_bright, bright_path, '?')
         
+        current += 1
+        gimp.progress_update(float(current) / limit)
+        
         register_openers()
-
-        dir = "http://localhost:8000/api/"
         data, headers = multipart_encode({'normal': open(normal_path),'dark': open(dark_path),'bright': open(bright_path)})
-        request = urllib2.Request(dir, data, headers)
+        file_upload_endpoint = "http://localhost:8000/api/"
+        request = urllib2.Request(file_upload_endpoint, data, headers)
         response = urllib2.urlopen(request).read()
         
-        id = json.loads(response)['id']
+        current += 1
+        gimp.progress_update(float(current) / limit)
         
+        id = json.loads(response)['id']
+        remote_file_name = "hdr_final_" + str(id) + ".jpg"
+        file_download_endpoint = "http://localhost:8000/media/"
         final_path = os.path.join(temporary_directory, "final_path.jpg")
-        urllib.urlretrieve("http://localhost:8000/media/hdr_final_" + str(id) + ".jpg", final_path)
+        urllib.urlretrieve(file_download_endpoint + remote_file_name, final_path)
+        
+        current += 1
+        gimp.progress_update(float(current) / limit)
         
         new_file = pdb.gimp_file_load(final_path, final_path)
         drawable = pdb.gimp_image_get_active_layer(new_file)
@@ -645,6 +658,9 @@ def python_kent_hdr(image, drawable, width1, width2, blur, levelLight, levelDark
         
         new_layer = image.new_layer()
         pdb.gimp_edit_paste(new_layer, True)
+        
+        current += 1
+        gimp.progress_update(float(current) / limit)
         
         pdb.gimp_image_flatten(image)    
 	pdb.gimp_image_undo_group_end(image)
