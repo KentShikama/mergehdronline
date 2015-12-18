@@ -48,6 +48,8 @@ The HDR merging method used in this GIMP plugin and API, as mentioned above, ins
 
 ![Kent HDR](images/kluki_using_kent_plugin_hdr.jpg?raw=true)
 
+Resulting HDR merged image using this plugin
+
 As you can see, we no longer have the halos in the sky or at the edge of the roof. If you compare this image to the original "normal" exposure photograph, we can see how there is much more details in the sky. Note I made the plugin automatically apply a white balance correction and I have also manually adjusted the brightness and contrast a bit.
 
 ## Development Set Up
