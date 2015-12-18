@@ -552,59 +552,6 @@ def register_openers():
 
 # Source copy from Poster Library http://atlee.ca/software/poster/ ends here
 
-#
-# Source copied from HDR (High Dynamic Range) with tone mapping by feca http://registry.gimp.org/node/24310
-#
-class pixel_fetcher:
-        def __init__(self, drawable):
-                self.col = -1
-                self.row = -1
-                self.img_width = drawable.width
-                self.img_height = drawable.height
-                self.img_bpp = drawable.bpp
-                self.img_has_alpha = drawable.has_alpha
-                self.tile_width = 64
-                self.tile_height = 64
-                self.bg_colour = '\0\0\0\0'
-                self.bounds = drawable.mask_bounds
-                self.drawable = drawable
-                self.tile = None
-        def set_bg_colour(self, r, g, b, a):
-                self.bg_colour = struct.pack('BBB', r,g,b)
-                if self.img_has_alpha:
-                        self.bg_colour = self.bg_colour + chr(a)
-        def get_pixel(self, x, y):
-                sel_x1, sel_y1, sel_x2, sel_y2 = self.bounds
-                if x < sel_x1 or x >= sel_x2 or y < sel_y1 or y >= sel_y2:
-                        return self.bg_colour
-                col = x / self.tile_width
-                coloff = x % self.tile_width
-                row = y / self.tile_height
-                rowoff = y % self.tile_height
-
-                if col != self.col or row != self.row or self.tile == None:
-                        self.tile = self.drawable.get_tile(FALSE, row, col)
-                        self.col = col
-                        self.row = row
-                return self.tile[coloff, rowoff]
-        def set_pixel(self, x, y, pixel):
-                sel_x1, sel_y1, sel_x2, sel_y2 = self.bounds
-                if x < sel_x1 or x >= sel_x2 or y < sel_y1 or y >= sel_y2:
-                        return
-                col = x / self.tile_width
-                coloff = x % self.tile_width
-                row = y / self.tile_height
-                rowoff = y % self.tile_height
-
-                if col != self.col or row != self.row or self.tile == None:
-                        self.tile = self.drawable.get_tile(FALSE, row, col)
-                        self.col = col
-                        self.row = row
-                self.tile[coloff, rowoff] = pixel
-#
-# Source copy from HDR (High Dynamic Range) with tone mapping by feca http://registry.gimp.org/node/24310 end
-#
-
 import tempfile, urllib2, json
 def python_kent_hdr(image, drawable, stops, alpha, beta, theta):
         base_url = "http://mergehdronline.com"
