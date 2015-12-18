@@ -53,6 +53,40 @@ Resulting HDR merged image using this plugin
 
 As you can see, we no longer have the halos in the sky or at the edge of the roof. If you compare this image to the original "normal" exposure photograph, we can see how there is much more details in the sky. Note I made the plugin automatically apply a white balance correction and I have also manually adjusted the brightness and contrast a bit.
 
+## API
+
+The plugin uses an API that I created and am hosting at [Merge HDR Online](http://mergehdronline.com). There are two API endpoints: one for uploading the images you want to merge and one for downloading the resulting JPG.
+
+### API Merge Uploading Endpoint
+
+Make sure to remember the returned ID number as you will need it to retrieve the resulting merged image.
+
+Endpoint (POST): http://mergehdronline.com/api/
+
+Params:
+
+- 'dark': File
+- 'normal': File
+- 'bright': File
+- 'stops': Int (1-8) - Number of stops in your image
+- 'alpha': Float (0-0.5) - Strength of preservation of local gradients
+- 'beta': Float (0-0.5) - Strength of tone mapping
+- 'theta': Float (0-1) - Large scale contrast smoothing
+
+Returns:
+
+- 'id': ID number
+
+### API Resulting JPG Downloading
+
+Endpoint (GET): http://mergehdronline.com/media/hdr_final_{your_id_from_above}.jpg
+
+### Sample API Request/Response Script
+
+You can find [a sample python script in this repository](sample_api_request_script.py) that uploads three images and saves the output to sample_output.jpg. Note that you will need to install poster, which can be done through `pip install poster`.
+
+The API works by wrapping a very minorly tweaked version of the C++ implementation of the Gradient Based HDR compression algorithm by [Andrew Cotter](http://ttic.uchicago.edu/~cotter/projects/hdr_tools/). The web requests are handled by Django. The rationale for using an API is it allows the user to simply install a GIMP plugin in the standard fashion without having to configure and install C scripts or have a performance hit by having the entire HDR merging process executed in python. In decent bandwidth areas, the server should much faster at processing than a local python script even when including time that it takes to POST and GET the files. Note you can also set up the API on your localhost as instructed below in the "Development Set Up" section.
+
 ## Development Set Up
 
 ### "HDR Tools" (By Andrew Cotter) Set Up 
