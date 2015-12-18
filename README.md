@@ -10,7 +10,7 @@ A [HDR merging GIMP plugin](kent_hdr.py) along with an API service that allows y
 - From the menu: Python-Fu -> Merge with Gradient Based HDR
 - Adjust the parameters if you wish (the defaults should most be fine)
 
-![Options](images/plugin_options.png?raw=true)
+![Options](images/plugin_options_screen.png?raw=true)
 
 - Click OK
 
@@ -46,7 +46,7 @@ While this does indeed allow you to preserve details as you can see above, it of
 
 The HDR merging method used in this GIMP plugin and API, as mentioned above, instead creates a HDR radiance map which reflects the "true" radiance of the scene by combining the 3 images. Once this HDR radiance map is reconstructed, we scale down the dynamic range of the radiance map (this operation is known as tone mapping). This is needed because as most monitors do not have the capability to display such a dynamic range. While we can simply squish down the dynamic range to fit within the display range of the monitor, this type of "global tone mapping operator" causes local contrasts to disappear. Thus this plugin instead uses an algorithm called [Gradient Domain High Dynamic Range Compression algorithm which is by Raanan Fattal, Dani Lischinski and Michael Werman](http://ahtariev.ru/OLD/content/hdr_art/hdrc.pdf) that squishes larger gradients in the HDR radiance map more than the smaller gradients. This has the effect of preserving local contrasts while still allowing the resulting image to fit within the display range of the monitor. Here is the result of using this plugin (with the default parameters):
 
-![Kent HDR](images/kluki_using_kent_hdr.jpg?raw=true)
+![Kent HDR](images/kluki_using_kent_plugin_hdr.jpg?raw=true)
 
 As you can see, we no longer have the halos in the sky or at the edge of the roof. If you compare this image to the original "normal" exposure photograph, we can see how there is much more details in the sky. Note I made the plugin automatically apply a white balance correction and I have also manually adjusted the brightness and contrast a bit.
 
