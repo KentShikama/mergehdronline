@@ -1,15 +1,44 @@
 <row>
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-        <h1 class="home-h1">Online HDR</h1>
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h1 class="home-h1">HDR Merging API</h1>
+        <br/>
 
-        <p>A free online HDR creation service.</p>
+        <p>HDR Merging Online is a API service that allows you to perform HDR merging using the <a
+                href="http://ahtariev.ru/OLD/content/hdr_art/hdrc.pdf">Gradient Domain High Dynamic Range Compression
+            algorithm by Raanan Fattal, Dani Lischinski and Michael Werman</a>.</p>
 
-        <div class="margin100"></div>
-        <div class="text-center">
-            <a href="#"><button class="btn btn-xlg btn-default btn-primary">Try it now</button></a>
-        </div>
+        <p>It essentially allows you to upload 3 images (normal exposure, bright exposure and dark exposure) and have it return a resulting merged image.</p>
+
+        <p>There are two API endpoints: one for uploading the images you want to merge and one for downloading the
+            resulting JPG.</p>
+
+        <h3><a id="API_Merge_Uploading_Endpoint_2"></a>API Merge Uploading Endpoint</h3>
+
+        <p>Make sure to remember the returned ID number as you will need it to retrieve the resulting merged image.</p>
+
+        <p>Endpoint (POST): <a href="http://mergehdronline.com/api/">http://mergehdronline.com/api/</a></p>
+
+        <p>Params:</p>
+        <ul>
+            <li>‘dark’: File</li>
+            <li>‘normal’: File</li>
+            <li>‘bright’: File</li>
+            <li>‘stops’: Int (1-8) - Number of stops in your image</li>
+            <li>‘alpha’: Float (0-0.5) - Strength of preservation of local gradients</li>
+            <li>‘beta’: Float (0-0.5) - Strength of tone mapping</li>
+            <li>‘theta’: Float (0-1) - Large scale contrast smoothing</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li>‘id’: ID number</li>
+        </ul>
+        <h3><a id="API_Resulting_JPG_Downloading_22"></a>API Resulting JPG Downloading</h3>
+
+        <p>Endpoint (GET): <a href="http://mergehdronline.com/media/hdr_final_%7Byour_id_from_above%7D.jpg">http://mergehdronline.com/media/hdr_final_{your_id_from_above}.jpg</a>
+        </p>
+
         <div class="margin100"></div>
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-2"></div>
 </row>
