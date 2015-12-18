@@ -1,6 +1,6 @@
 # HDR GIMP Plugin
 
-A [HDR merging GIMP plugin](kent_hdr.py) along with an API service that allows you to instantly merge HDRs online for free.
+A [HDR merging GIMP plugin](kent_hdr.py) along with an online HDR merging API service.
 
 ## How to use GIMP plugin
 
