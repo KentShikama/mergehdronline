@@ -2,6 +2,8 @@
 
 A [HDR merging GIMP plugin](kent_hdr.py) along with an online HDR merging API service.
 
+Please take a look at [the live demo](live_demo_of_before_and_after.mov) which first shows the feca's plugin and then shows mine. You can download the entire repository by clicking the Download ZIP button on Github.
+
 ## How to use GIMP plugin
 
 - Install [GIMP](https://www.gimp.org)
