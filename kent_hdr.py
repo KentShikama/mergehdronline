@@ -606,7 +606,7 @@ class pixel_fetcher:
 #
 
 import tempfile, urllib2, json
-def python_kent_hdr(image, drawable, width1, width2, blur, levelLight, levelDark):
+def python_kent_hdr(image, drawable, stops, alpha, beta, theta):
         if (len(image.layers) != 3):
                 pdb.gimp_message("This plugin requires 3 layers: Normal, -EV, +EV")
                 return
@@ -635,7 +635,7 @@ def python_kent_hdr(image, drawable, width1, width2, blur, levelLight, levelDark
         gimp.progress_update(float(current) / limit)
         
         register_openers()
-        data, headers = multipart_encode({'normal': open(normal_path),'dark': open(dark_path),'bright': open(bright_path)})
+        data, headers = multipart_encode({'stops': stops, 'alpha': alpha, 'beta': beta, 'theta': theta, 'normal': open(normal_path),'dark': open(dark_path),'bright': open(bright_path)})
         file_upload_endpoint = "http://localhost:8000/api/"
         request = urllib2.Request(file_upload_endpoint, data, headers)
         response = urllib2.urlopen(request).read()
@@ -672,15 +672,14 @@ register(
         "High dynamic range with Gradient Domain High Dynamic Range Compression",
         "Kent Shikama",
         "Kent Shikama",
-        "2014",
+        "2015",
         "<Image>/Python-Fu/Render/Merge with Gradient Domain HDR",
         "*",
         [
-                (PF_SPINNER, "width1", "Extreme value width (10-50)", 40, (10, 50, 1)),
-                (PF_SPINNER, "width2", "Greater width (20-80)", 50, (20, 80, 1)),
-                (PF_SPINNER, "blur", "Blurring of extreme colors (0-50)", 10, (0, 50, 1)),
-                (PF_SPINNER, "levelLight", "Light colors darking (-100-100)", 30, (-100, 100, 1)),
-                (PF_SPINNER, "levelDark", "Dark colors lighting (-100-100)", 30, (-100, 100, 1))
+                (PF_SPINNER, "stops", "The number of stops the images span (1-8)", 4, (1, 8, 1)),
+                (PF_SPINNER, "alpha", "Preservation of local gradients (0-0.5)", 0.1, (0, 1, 0.1)),
+                (PF_SPINNER, "beta", "Strength of tone mapping (0-0.5)", 0.1, (0, 1, 0.1)),
+                (PF_SPINNER, "theta", "Large scale contrast smoothing (0-1)", 0, (0, 1, 0.1))
         ],
         [],
         python_kent_hdr)
