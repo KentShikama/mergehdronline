@@ -1,0 +1,11 @@
+Django==1.8.5
+django-bootstrap3-sass==3.3.2.2
+django-compressor==1.5
+django-extensions==1.5.9
+django-libsass==0.4
+django-widget-tweaks==1.4.1
+virtualenv==13.1.2
+ipdb==0.8.1
+djangorestframework==3.2.4
+requests==2.8.1
+beautifulsoup4==4.4.1

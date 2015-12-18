@@ -1,0 +1,127 @@
+@import "bootstrap-variables";
+@import "../bootstrap";
+@import "bootswatch";
+
+.home-h1 {
+  font-size: 80px;
+}
+
+.btn-xlg {
+  padding: 18px 28px;
+  font-size: 70px; //change this to your desired size
+  line-height: normal;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+html, body {
+  min-height: 100vh;
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  min-height: 81vh;
+}
+
+.footer {
+  border-top: 1px #EEEEEE solid;
+  color: #444;
+  text-align: center;
+  padding: 14px 0px;
+}
+
+.edit_button {
+  overflow: auto;
+  clear: both;
+}
+
+.profile-wrapper {
+  padding: 50px;
+  text-align: center;
+  p {
+    padding: 20px;
+    text-align: left;
+  }
+}
+
+.profile-image {
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+}
+
+.dot {
+  color: #333;
+  background-color: #333;
+}
+
+.margin10 {
+  margin: 10px;
+}
+
+.margin20 {
+  margin: 20px;
+}
+
+.margin100 {
+  margin: 100px;
+}
+
+.account-form {
+  padding-bottom: 20px;
+  overflow: auto;
+  display: block;
+  clear: both;
+}
+
+hr {
+  margin-top: 10px;
+  margin-bottom: 18px;
+}
+
+.btn-ofiction-form {
+  width: 300px;
+}
+
+#cy {
+  width: 100%;
+  height: 80%;
+  position: absolute;
+  left: 0;
+  top: 60px;
+  z-index: 999;
+}
+
+.nounderline {
+  text-decoration: none !important;
+}
+
+.left-align {
+  display: inline-block;
+  text-align: left;
+}
+
+.ofiction-panel-header {
+  margin-top: 13px;
+}
+
+.ofiction-panel-heading {
+  display: inline-block;
+}
+
+.ofiction-panel {
+  text-decoration: none !important;
+}
+
+.tiny-profile {
+    border-radius: 30%;
+    width: 25px;
+    height: 25px;
+}

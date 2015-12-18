@@ -1,0 +1,61 @@
+{% load compress %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    {% compress css %}
+        <link rel="stylesheet" type="text/x-scss" href="{% static "custom/main.scss" %}"/>
+        {% block css %}
+        {% endblock %}
+    {% endcompress %}
+    <script src="{% static "js/jquery-2.1.4.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static "pnotify/pnotify.custom.min.css" %}"/>
+    <script src="{% static "pnotify/pnotify.custom.min.js" %}"></script>
+    {% block javascript %}
+    {% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{% if request.user.profile %}
+    {% include '_navigation_user.html' %}
+{% else %}
+    {% include '_navigation_all.html' %}
+{% endif %}
+<div class="col-md-1"></div>
+<div class="content col-md-10">
+    <div class="wrapper">
+        {% block body %}
+        {% endblock %}
+    </div>
+    {% include '_footer.html' %}
+</div>
+<div class="col-md-offset-1"></div>
+{% block additional_script %}
+{% endblock %}
+{% if form.non_field_errors %}
+    <script>
+        $(document).ready(function () {
+            PNotify.prototype.options.styling = "bootstrap3";
+            $(function () {
+                var stack_topright = {"dir1": "down", "dir2": "left", "firstpos1": 80, "firstpos2": 20};
+                {% for error in form.non_field_errors %}
+                    new PNotify({
+                                    title: 'Error',
+                                    text: '{{ error }}',
+                                    type: 'error',
+                                    closer_hover: true,
+                                    sticker_hover: false,
+                                    hide: true,
+                                    delay: 8000,
+                                    stack: stack_topright
+                                });
+                {% endfor %}
+            });
+        });
+    </script>
+{% endif %}
+</body>
+</html>
