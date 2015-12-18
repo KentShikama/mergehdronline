@@ -6,6 +6,7 @@ A [HDR merging GIMP plugin](kent_hdr.py) along with an API service that allows y
 
 - Install [GIMP](https://www.gimp.org)
 - Download the [GIMP plugin (kent_hdr.py)](kent_hdr.py) from this repository and place it in the plug-in directory (e.g., /Users/me/Library/Application\ Support/GIMP/2.8/plug-ins/kent_hdr.py)
+  - Please see the [GIMP wiki for generic instructions on how to install GIMP plugins](https://en.wikibooks.org/wiki/GIMP/Installing_Plugins)
 - Load the exposure bracketed photos into GIMP (Normal, -EV, +EV) as 3 layers
 - From the menu: Python-Fu -> Merge with Gradient Based HDR
 - Adjust the parameters if you wish (the defaults should most be fine)
