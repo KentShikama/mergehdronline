@@ -607,6 +607,7 @@ class pixel_fetcher:
 
 import tempfile, urllib2, json
 def python_kent_hdr(image, drawable, stops, alpha, beta, theta):
+        base_url = "http://mergehdronline.com"
         if (len(image.layers) != 3):
                 pdb.gimp_message("This plugin requires 3 layers: Normal, -EV, +EV")
                 return
@@ -636,7 +637,7 @@ def python_kent_hdr(image, drawable, stops, alpha, beta, theta):
         
         register_openers()
         data, headers = multipart_encode({'stops': stops, 'alpha': alpha, 'beta': beta, 'theta': theta, 'normal': open(normal_path),'dark': open(dark_path),'bright': open(bright_path)})
-        file_upload_endpoint = "http://localhost:8000/api/"
+        file_upload_endpoint = base_url + "/api/"
         request = urllib2.Request(file_upload_endpoint, data, headers)
         response = urllib2.urlopen(request).read()
         
@@ -645,7 +646,7 @@ def python_kent_hdr(image, drawable, stops, alpha, beta, theta):
         
         id = json.loads(response)['id']
         remote_file_name = "hdr_final_" + str(id) + ".jpg"
-        file_download_endpoint = "http://localhost:8000/media/"
+        file_download_endpoint = base_url + "/media/"
         final_path = os.path.join(temporary_directory, "final_path.jpg")
         urllib.urlretrieve(file_download_endpoint + remote_file_name, final_path)
         
