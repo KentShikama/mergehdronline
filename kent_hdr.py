@@ -654,6 +654,7 @@ def python_kent_hdr(image, drawable, width1, width2, blur, levelLight, levelDark
         
         new_file = pdb.gimp_file_load(final_path, final_path)
         drawable = pdb.gimp_image_get_active_layer(new_file)
+        pdb.gimp_levels_stretch(drawable)
         pdb.gimp_edit_copy(drawable)
         
         new_layer = image.new_layer()
