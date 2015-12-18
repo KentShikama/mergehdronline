@@ -1,5 +1,6 @@
+from api.views import FileUploadView
 from django.conf.urls import url
 
 urlpatterns = [
-    #url(r'^$', FictionList.as_view(), name="fictions"),
+    url(r'^$', FileUploadView.as_view(), name="upload"),
 ]
