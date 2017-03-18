@@ -1,3 +1,5 @@
+# No longer maintained
+
 # HDR GIMP Plugin
 
 A [HDR merging GIMP plugin](kent_hdr.py) along with an online HDR merging API service.
